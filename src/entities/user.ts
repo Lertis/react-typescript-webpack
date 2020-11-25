@@ -27,3 +27,27 @@ export interface IUser {
 	website: string;
 	company: ICompany;
 }
+
+export const NO_INFO_USER_INFO: IUser = {
+	id: 0,
+	name: "",
+	username: "",
+	email: "",
+	address: {
+		street: "",
+		suite: "",
+		city: "",
+		zipcode: "",
+		geo: {
+			lat: "",
+			lng: ""
+		}
+	},
+	phone: "",
+	website: "",
+	company: {
+		name: "",
+		catchPhrase: "",
+		bs: "",
+	}
+};

@@ -48,3 +48,15 @@
 .flexPosition > div {
 	margin-left: 10px;
 }
+
+.flex-space-around {
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+}
+
+.flex-stretch {
+	display: flex;
+	justify-content: stretch;
+	align-items: center;
+}
