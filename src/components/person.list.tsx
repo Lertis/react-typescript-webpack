@@ -8,6 +8,8 @@ import "./../App.css"
 
 export interface IUserListState {
 	users: IUser[];
+	filteredUsers: IUser[];
+	searchTerm: string;
 	selectedId: number;
 	error: any;
 }
@@ -18,7 +20,13 @@ export default class PersonList extends React.Component<any, IUserListState> {
 
 	constructor(props: any) {
 		super(props);
-		const usersState: IUserListState = { users: [], selectedId: 0, error: {} };
+		const usersState: IUserListState = {
+			users: [],
+			filteredUsers: [],
+			searchTerm: "",
+			selectedId: 0,
+			error: {}
+		};
 		this.state = cloneDeep(usersState);
 	}
 
@@ -45,13 +53,40 @@ export default class PersonList extends React.Component<any, IUserListState> {
 		return this.state.users.find((user: IUser) => user.id === this.state.selectedId);
 	}
 
+	filterUsers(event: React.ChangeEvent<HTMLInputElement>) {
+		const searchTerm = event.target.value;
+		if (searchTerm === "") {
+			this.setState({ selectedId: 0 });
+		}
+		this.setState({ searchTerm: event.target.value });
+	}
+
+	whatShouldBeDisplayed(): IUser[] {
+		const searchTerm = this.state.searchTerm;
+		const allUsers = this.state.users;
+		if (searchTerm === "") {
+			return allUsers;
+		} else {
+			const filteredUsers = this.state.users.filter((user: IUser) => user.name.includes(searchTerm));
+			if (filteredUsers.length !== 0) {
+				return filteredUsers;
+			} else {
+				return [];
+			}
+		}
+
+	}
+
 	render() {
 		return (
 			<div>
+				<div>
+					<input type="text" placeholder="Enter item to be searched" onChange={(e: React.ChangeEvent<HTMLInputElement>) => this.filterUsers(e)} />
+				</div>
 				<div className="flex-space-around">
 					<div>
 						<List component="nav" aria-label="main mailbox folders">
-							{this.state.users.map((user: IUser) =>
+							{this.whatShouldBeDisplayed().map((user: IUser) =>
 								<div key={user.id}>
 									<ListItem>
 										<div className="flexPosition">
@@ -66,7 +101,7 @@ export default class PersonList extends React.Component<any, IUserListState> {
 								</div>)}
 						</List></div>
 					<div>
-						<PersonDetail detail={this.getSelectedUserDetails()} />
+						<PersonDetail detail={this.getSelectedUserDetails()} nothingToShow={!!this.whatShouldBeDisplayed().length} />
 					</div>
 				</div>
 			</div>

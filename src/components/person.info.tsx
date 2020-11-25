@@ -6,40 +6,49 @@ import { Phone } from "@material-ui/icons";
 
 export interface IUserDetailsState {
 	user: IUser | undefined;
+	nothingToShow: boolean
 }
 
-export default class PersonDetail extends React.Component<{ detail: IUser | undefined }, IUserDetailsState> {
-	constructor(props: { detail: IUser }) {
+export default class PersonDetail extends React.Component<{ detail: IUser | undefined, nothingToShow: boolean }, IUserDetailsState> {
+	constructor(props: { detail: IUser, nothingToShow: boolean }) {
 		super(props);
-		const userDetails: IUserDetailsState = { user: cloneDeep(NO_INFO_USER_INFO) };
+		const userDetails: IUserDetailsState = { user: cloneDeep(NO_INFO_USER_INFO), nothingToShow: false };
 		this.state = cloneDeep(userDetails);
 	}
 
-	componentWillReceiveProps(nextProps: { detail: IUser }) {
-		this.setState({ user: nextProps.detail });
+	componentWillReceiveProps(nextProps: { detail: IUser, nothingToShow: boolean }) {
+		this.setState({ user: nextProps.detail, nothingToShow: nextProps.nothingToShow });
+	}
+
+	anyUserToBeShown(): boolean {
+		return !!this.state.nothingToShow;
+	}
+
+	anyUserDetails(): JSX.Element {
+		return !!this.props.detail ? <Card>
+			<CardContent>
+				<Typography color="textSecondary" gutterBottom>
+					User e-mail : {this.state.user?.email}
+				</Typography>
+				<Typography variant="h5" component="h2">
+					User name: {this.state.user?.name}
+				</Typography>
+				<Typography color="textSecondary">
+					Company: {this.state.user?.company.name}
+				</Typography>
+				<Typography className="flex-stretch" variant="body2" component="p">
+					<Phone /> {this.state.user?.phone}
+				</Typography>
+			</CardContent>
+		</Card>
+			: <div>Please select any user!</div>;
 	}
 
 	render() {
-		return (<div>
-			{!!this.props.detail
-				? <div>
-					<Card>
-						<CardContent>
-							<Typography color="textSecondary" gutterBottom>
-								User e-mail : {this.state.user?.email}
-							</Typography>
-							<Typography variant="h5" component="h2">
-								User name: {this.state.user?.name}
-							</Typography>
-							<Typography color="textSecondary">
-								Company: {this.state.user?.company.name}
-							</Typography>
-							<Typography className="flex-stretch" variant="body2" component="p">
-								<Phone /> {this.state.user?.phone}
-							</Typography>
-						</CardContent>
-					</Card></div>
-				: <div>Please select any user!</div>}
-		</div>);
+		return (
+			<div>
+				{this.anyUserToBeShown() ? <div>{this.anyUserDetails()}</div>
+					: <div>No users to be displayed!</div>}
+			</div>);
 	}
 }
