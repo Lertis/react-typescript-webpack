@@ -1,12 +1,15 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
-import PersonList from "./components/person.list";
+
+const LazyLoadedRootComponent = React.lazy(() => import("./components/person.list"));
 
 ReactDOM.render(
 	<React.StrictMode>
-		<PersonList />
+		<Suspense fallback={<div>Loading...</div>}>
+			<LazyLoadedRootComponent />
+		</Suspense>
 	</React.StrictMode>,
 	document.getElementById('root')
 );
