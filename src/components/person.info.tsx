@@ -16,8 +16,15 @@ export default class PersonDetail extends React.Component<{ detail: IUser | unde
 		this.state = cloneDeep(userDetails);
 	}
 
-	componentWillReceiveProps(nextProps: { detail: IUser, nothingToShow: boolean }) {
-		this.setState({ user: nextProps.detail, nothingToShow: nextProps.nothingToShow });
+	componentDidUpdate(nextProps: { detail: IUser | undefined, nothingToShow: boolean }) {
+		const newProps: { detail: IUser | undefined, nothingToShow: boolean } = this.props;
+		if (nextProps.detail !== newProps.detail && newProps) {
+				this.setState({ user: newProps.detail, nothingToShow: newProps.nothingToShow })
+		}
+	}
+
+	static getDerivedStateFromProps(nextProps: { detail: IUser, nothingToShow: boolean }, prevState: IUserDetailsState) {
+		return { newUserInfo: nextProps.detail };
 	}
 
 	anyUserToBeShown(): boolean {
