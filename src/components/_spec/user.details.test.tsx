@@ -18,7 +18,7 @@ describe("PersonDetail Component", () => {
 	it('[Method: anyUserDetails]', () => {
 		const wrapper = shallow(<PersonDetail detail={cloneDeep(USER_INFO_1)} nothingToShow={false}></PersonDetail>);
 		const instance = wrapper.instance();
-		const res = (instance as any).anyUserDetails();
+		const res = (instance as PersonDetail).anyUserDetails();
 		expect(res).toMatchSnapshot();
 	});
 
