@@ -1,37 +1,33 @@
 import React from 'react';
 import renderer from "react-test-renderer"
+import { shallow } from 'enzyme';
 import PersonDetail from '../person.info';
-
-let USER_INFO = {
-	id: 1,
-	name: "Leanne Graham",
-	username: "Bret",
-	email: "Sincere@april.biz",
-	address: {
-		street: "Kulas Light",
-		suite: "Apt. 556",
-		city: "Gwenborough",
-		zipcode: "92998-3874",
-		geo: {
-			lat: "-37.3159",
-			lng: "81.1496"
-		}
-	},
-	phone: "1-770-736-8031 x56442",
-	website: "hildegard.org",
-	company: {
-		name: "Romaguera-Crona",
-		catchPhrase: "Multi-layered client-server neural-net",
-		bs: "harness real-time e-markets"
-	}
-}
+import { cloneDeep } from "lodash";
+import { USER_INFO_1, USER_INFO_2 } from "./user.details.set";
+import "./../../setupTests";
 
 describe("PersonDetail Component", () => {
-	test("should be created", () => {
+	it(`should be created with: with userDetails and nothingToShow as false`, () => {
 		let component = renderer.create(
-			<PersonDetail detail={USER_INFO} nothingToShow={false}></PersonDetail>,
+			<PersonDetail detail={cloneDeep(USER_INFO_1)} nothingToShow={false}></PersonDetail>,
 		);
 		let detailsComponent = component.toJSON();
 		expect(detailsComponent).toMatchSnapshot();
 	});
+
+	it('[Method: anyUserDetails]', () => {
+		const wrapper = shallow(<PersonDetail detail={cloneDeep(USER_INFO_1)} nothingToShow={false}></PersonDetail>);
+		const instance = wrapper.instance();
+		const res = (instance as any).anyUserDetails();
+		expect(res).toMatchSnapshot();
+	});
+
+	it('componentWillReceiveProps', () => {
+		const component = shallow(<PersonDetail detail={cloneDeep(USER_INFO_1)} nothingToShow={false}></PersonDetail>);
+		component.setProps({
+			detail: cloneDeep(USER_INFO_2)
+		});
+		expect(component).toMatchSnapshot();
+		expect(component).toBeTruthy();
+	})
 });

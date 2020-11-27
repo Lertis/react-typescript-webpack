@@ -1,6 +1,44 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`PersonDetail Component should be created 1`] = `
+exports[`PersonDetail Component [Method: anyUserDetails] 1`] = `
+<WithStyles(ForwardRef(Card))>
+  <WithStyles(ForwardRef(CardContent))>
+    <WithStyles(ForwardRef(Typography))
+      color="textSecondary"
+      gutterBottom={true}
+    >
+      User e-mail : 
+      
+    </WithStyles(ForwardRef(Typography))>
+    <WithStyles(ForwardRef(Typography))
+      component="h2"
+      variant="h5"
+    >
+      User name: 
+      
+    </WithStyles(ForwardRef(Typography))>
+    <WithStyles(ForwardRef(Typography))
+      color="textSecondary"
+    >
+      Company: 
+      
+    </WithStyles(ForwardRef(Typography))>
+    <WithStyles(ForwardRef(Typography))
+      className="flex-stretch"
+      component="p"
+      variant="body2"
+    >
+      <Memo(PhoneIcon) />
+       
+      
+    </WithStyles(ForwardRef(Typography))>
+  </WithStyles(ForwardRef(CardContent))>
+</WithStyles(ForwardRef(Card))>
+`;
+
+exports[`PersonDetail Component componentWillReceiveProps 1`] = `ShallowWrapper {}`;
+
+exports[`PersonDetail Component should be created with: with userDetails and nothingToShow as false 1`] = `
 <div>
   <div>
     No users to be displayed!

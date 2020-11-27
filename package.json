@@ -12,32 +12,48 @@
 		"@testing-library/jest-dom": "^5.11.6",
 		"@testing-library/react": "^11.2.2",
 		"@testing-library/user-event": "12.2.2",
+		"@types/enzyme": "^3.10.8",
+		"@types/enzyme-adapter-react-16": "^1.0.6",
 		"@types/jest": "^26.0.15",
 		"@types/lodash": "4.14.165",
 		"@types/node": "12.19.6",
 		"@types/react": "16.14.2",
 		"@types/react-dom": "16.9.10",
 		"@types/react-test-renderer": "17.0.0",
+		"@types/sinon": "^9.0.9",
 		"axios": "0.21.0",
 		"babel-jest": "26.6.3",
+		"awesome-typescript-loader": "5.2.1",
+		"css-loader": "1.0.0",
+		"enzyme": "^3.11.0",
+		"file-loader": "6.2.0",
+		"html-webpack-plugin": "4.5.0",
+		"sinon": "^9.2.1",
+		"style-loader": "0.23.0",
+		"typescript": "4.1.2",
+		"webpack": "4.20.2",
+		"webpack-cli": "3.1.1",
+		"webpack-dev-server": "3.1.14",
+		"enzyme-adapter-react-16": "^1.15.5",
 		"jest": "^26.1.0",
 		"lodash": "4.17.20",
 		"react": "17.0.1",
 		"react-dom": "17.0.1",
 		"react-scripts": "4.0.1",
-		"react-test-renderer": "17.0.1",
+		"react-test-renderer": "^17.0.1",
 		"ts-jest": "^26.4.4",
 		"web-vitals": "0.2.4"
 	},
 	"scripts": {
 		"start": "webpack-dev-server --mode development --open --hot",
 		"build": "webpack --mode production",
-		"test": "jest",
-		"test-changed": "jest --onlyChanged",
-		"test-coverage": "jest --coverage",
-		"test-coverage-changed": "jest --coverage --onlyChanged",
-		"test-snapshots": "jest -- -u",
-		"test-clear-cache": "jest --clearCache"
+		"test": "react-scripts test",
+		"test-j": "jest",
+		"test-j-changed": "jest --onlyChanged",
+		"test-j-coverage": "jest --coverage",
+		"test-j-coverage-changed": "jest --coverage --onlyChanged",
+		"test-j-snapshots": "jest -- -u",
+		"test-j-clear-cache": "jest --clearCache"
 	},
 	"eslintConfig": {
 		"extends": [
@@ -56,16 +72,5 @@
 			"last 1 firefox version",
 			"last 1 safari version"
 		]
-	},
-	"devDependencies": {
-		"awesome-typescript-loader": "5.2.1",
-		"html-webpack-plugin": "4.5.0",
-		"typescript": "4.1.2",
-		"style-loader": "0.23.0",
-		"css-loader": "1.0.0",
-		"file-loader": "6.2.0",
-		"webpack": "4.20.2",
-		"webpack-cli": "3.1.1",
-		"webpack-dev-server": "3.1.14"
 	}
 }
