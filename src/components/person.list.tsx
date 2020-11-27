@@ -1,10 +1,10 @@
-import React from 'react';
-import axios from 'axios';
+import React from "react";
+import axios from "axios";
 import { Button, ListItemText, ListItem, List } from "@material-ui/core";
 import { IUser } from "../entities/user";
 import PersonDetail from "./person.info";
 import { cloneDeep } from "lodash";
-import "./../App.css"
+import "./../App.css";
 
 export interface IUserListState {
 	users: IUser[];
@@ -15,7 +15,6 @@ export interface IUserListState {
 }
 
 export default class PersonList extends React.Component<any, IUserListState> {
-
 	private readonly BASE_URL = `https://jsonplaceholder.typicode.com`;
 
 	constructor(props: any) {
@@ -25,25 +24,26 @@ export default class PersonList extends React.Component<any, IUserListState> {
 			filteredUsers: [],
 			searchTerm: "",
 			selectedId: 0,
-			error: {}
+			error: {},
 		};
 		this.state = cloneDeep(usersState);
 	}
 
 	componentDidMount(): void {
-		axios.get(`${this.BASE_URL}/users`)
+		axios
+			.get(`${this.BASE_URL}/users`)
 			.then((res) => {
 				const users: IUser[] = res.data;
-				this.setState({ users })
+				this.setState({ users });
 			})
 			.catch((err) => {
 				this.setState({ error: err });
-			})
+			});
 	}
 
 	buttonPlusHandler = (selectedId: number) => {
 		this.setState({ selectedId });
-	}
+	};
 
 	shouldTheSelectButtonBeDisabled(id: number) {
 		return this.state.selectedId === id;
@@ -74,19 +74,22 @@ export default class PersonList extends React.Component<any, IUserListState> {
 				return [];
 			}
 		}
-
 	}
 
 	render() {
 		return (
 			<div>
 				<div>
-					<input type="text" placeholder="Enter item to be searched" onChange={(e: React.ChangeEvent<HTMLInputElement>) => this.filterUsers(e)} />
+					<input
+						type="text"
+						placeholder="Enter item to be searched"
+						onChange={(e: React.ChangeEvent<HTMLInputElement>) => this.filterUsers(e)}
+					/>
 				</div>
 				<div className="flex-space-around">
 					<div>
 						<List component="nav" aria-label="main mailbox folders">
-							{this.whatShouldBeDisplayed().map((user: IUser) =>
+							{this.whatShouldBeDisplayed().map((user: IUser) => (
 								<div key={user.id}>
 									<ListItem>
 										<div className="flexPosition">
@@ -94,17 +97,25 @@ export default class PersonList extends React.Component<any, IUserListState> {
 												variant="contained"
 												color="primary"
 												disabled={this.shouldTheSelectButtonBeDisabled(user.id)}
-												onClick={this.buttonPlusHandler.bind(this, user.id)}>Select</Button>
+												onClick={this.buttonPlusHandler.bind(this, user.id)}
+											>
+												Select
+											</Button>
 											<ListItemText primary={user.name} />
 										</div>
 									</ListItem>
-								</div>)}
-						</List></div>
+								</div>
+							))}
+						</List>
+					</div>
 					<div>
-						<PersonDetail detail={this.getSelectedUserDetails()} nothingToShow={!!this.whatShouldBeDisplayed().length} />
+						<PersonDetail
+							detail={this.getSelectedUserDetails()}
+							nothingToShow={!!this.whatShouldBeDisplayed().length}
+						/>
 					</div>
 				</div>
 			</div>
-		)
+		);
 	}
 }

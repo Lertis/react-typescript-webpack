@@ -1,40 +1,40 @@
-const path = require('path');
+const path = require("path");
 
-const HtmlWebpackPlugin = require('html-webpack-plugin');
+const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 module.exports = {
-	entry: './src/index.tsx',
-	devtool: 'source-map',
+	entry: "./src/index.tsx",
+	devtool: "source-map",
 	resolve: {
-		extensions: ['.ts', '.tsx', '.js']
+		extensions: [".ts", ".tsx", ".js"],
 	},
 	output: {
-		path: path.join(__dirname, '/dist'),
-		filename: 'bundle.min.js'
+		path: path.join(__dirname, "/dist"),
+		filename: "bundle.min.js",
 	},
 	module: {
 		rules: [
 			{
 				test: /\.tsx?$/,
-				loader: 'awesome-typescript-loader'
+				loader: "awesome-typescript-loader",
 			},
 			{
 				test: /\.css$/,
-				use: ["style-loader", "css-loader"]
+				use: ["style-loader", "css-loader"],
 			},
 			{
 				test: /\.(png|jpe?g|gif|svg)$/i,
 				use: [
 					{
-						loader: 'file-loader',
+						loader: "file-loader",
 					},
 				],
-			}
-		]
+			},
+		],
 	},
 	plugins: [
 		new HtmlWebpackPlugin({
-			template: './public/index.html'
-		})
-	]
-}
+			template: "./public/index.html",
+		}),
+	],
+};

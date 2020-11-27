@@ -1,12 +1,8 @@
 {
 	"compilerOptions": {
-    "lib": [
-      "es2015",
-      "es2017",
-      "dom"
-    ],
-    "removeComments": true,
-    "baseUrl": "./",
+		"lib": ["es2015", "es2017", "dom"],
+		"removeComments": true,
+		"baseUrl": "./",
 		"target": "es5",
 		"allowJs": true,
 		"skipLibCheck": true,
@@ -26,10 +22,6 @@
 		"noImplicitAny": true,
 		"jsx": "react"
 	},
-	"exclude": [
-		"node_modules"
-	],
-	"include": [
-		"src"
-	]
+	"exclude": ["node_modules"],
+	"include": ["src"]
 }
