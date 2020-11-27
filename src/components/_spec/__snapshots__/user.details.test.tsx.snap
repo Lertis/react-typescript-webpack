@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`PersonDetail Component should be created 1`] = `
+<div>
+  <div>
+    No users to be displayed!
+  </div>
+</div>
+`;
