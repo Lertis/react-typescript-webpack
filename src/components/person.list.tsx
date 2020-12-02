@@ -3,8 +3,10 @@ import axios from "axios";
 import { Button, ListItemText, ListItem, List } from "@material-ui/core";
 import { IUser } from "../entities/user";
 import PersonDetail from "./person.info";
+import Comment from "./comment";
 import { cloneDeep } from "lodash";
 import "./../App.css";
+import ApprovalCard from "./approval.card";
 
 export interface IUserListState {
 	users: IUser[];
@@ -115,6 +117,16 @@ export default class PersonList extends React.Component<any, IUserListState> {
 						/>
 					</div>
 				</div>
+				<React.Fragment>
+					<div style={{ display: "none" }} className="ui containers comments">
+						<ApprovalCard>
+							<Comment author="Sam" timeAgo={new Date(2020, 1, 1, 14, 15, 0).toLocaleString()} content="Really cool!" />
+						</ApprovalCard>
+						<ApprovalCard>
+							<Comment author="Molly" timeAgo={new Date(2020, 3, 5, 6, 1, 8).toLocaleString()} content="I like it." />
+						</ApprovalCard>
+					</div>
+				</React.Fragment>
 			</div>
 		);
 	}
