@@ -7,6 +7,7 @@ import Comment from "./comment";
 import { cloneDeep } from "lodash";
 import "./../App.css";
 import ApprovalCard from "./approval.card";
+import PictureSearchWrapper from "./form-events/pictures.search.wrapper";
 
 export interface IUserListState {
 	users: IUser[];
@@ -126,6 +127,9 @@ export default class PersonList extends React.Component<any, IUserListState> {
 							<Comment author="Molly" timeAgo={new Date(2020, 3, 5, 6, 1, 8).toLocaleString()} content="I like it." />
 						</ApprovalCard>
 					</div>
+				</React.Fragment>
+				<React.Fragment>
+					<PictureSearchWrapper />
 				</React.Fragment>
 			</div>
 		);
