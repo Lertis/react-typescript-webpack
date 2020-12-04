@@ -8,6 +8,7 @@ import { cloneDeep } from "lodash";
 import "./../App.css";
 import ApprovalCard from "./approval.card";
 import PictureSearchWrapper from "./form-events/pictures.search.wrapper";
+import RxjsExamples from "./rxjs-examples/rxjs.examples";
 
 export interface IUserListState {
 	users: IUser[];
@@ -110,6 +111,7 @@ export default class PersonList extends React.Component<any, IUserListState> {
 								</div>
 							))}
 						</List>
+						<RxjsExamples />
 					</div>
 					<div>
 						<PersonDetail
