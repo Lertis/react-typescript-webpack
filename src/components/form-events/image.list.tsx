@@ -5,7 +5,7 @@ import { IImage } from "../../entities/image";
 
 export default class ImageList extends React.Component<{ images: IImage[] }> {
 	render() {
-		const images = this.props.images.map(image => {
+		const images = this.props.images.map((image: IImage) => {
 			return <ImageCard key={image.id} image={image} />;
 		});
 

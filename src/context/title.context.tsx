@@ -26,8 +26,7 @@ export default class Lesson extends React.Component {
 				value={{
 					title: "Simple Title",
 					titleClick: () => console.log(`Title has been clicked!`),
-				}}
-			>
+				}}>
 				<LevelOne />
 			</TitleContext.Provider>
 		);

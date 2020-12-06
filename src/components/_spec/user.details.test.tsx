@@ -9,7 +9,7 @@ import "./../../setupTests";
 describe("PersonDetail Component", () => {
 	it(`should be created with: with userDetails and nothingToShow as false`, () => {
 		let component = renderer.create(
-			<PersonDetail detail={cloneDeep(USER_INFO_1)} nothingToShow={false}></PersonDetail>,
+			<PersonDetail detail={cloneDeep(USER_INFO_1)} nothingToShow={false}></PersonDetail>
 		);
 		let detailsComponent = component.toJSON();
 		expect(detailsComponent).toMatchSnapshot();

@@ -3,24 +3,22 @@ import axois, { AxiosResponse } from "axios";
 import { forkJoin, from, Observable, of, Subject } from "rxjs";
 import { debounceTime, distinctUntilChanged, mergeMap, takeUntil } from "rxjs/operators";
 
-export default class RxjsExamples extends React.Component<{}, { numbers: number[], inputDoubounce: string }> {
-	private readonly BASE_URL = `https://jsonplaceholder.typicode.com`
+export default class RxjsExamples extends React.Component<{}, { numbers: number[]; inputDoubounce: string }> {
+	private readonly BASE_URL = `https://jsonplaceholder.typicode.com`;
 	state = {
 		numbers: [],
-		inputDoubounce: ""
+		inputDoubounce: "",
 	};
 
 	constructor(props: {}) {
 		super(props);
 		// Subscription section
-		this.updateInput.pipe(
-			takeUntil(this.destroy$),
-			debounceTime(500),
-			distinctUntilChanged()
-		).subscribe((input: string) => {
-			// setState will be triggered only after 500ms debounced time and uniq value
-			this.setState({ inputDoubounce: input });
-		});
+		this.updateInput
+			.pipe(takeUntil(this.destroy$), debounceTime(500), distinctUntilChanged())
+			.subscribe((input: string) => {
+				// setState will be triggered only after 500ms debounced time and uniq value
+				this.setState({ inputDoubounce: input });
+			});
 	}
 
 	private readonly updateInput: Subject<string> = new Subject<string>();
@@ -34,38 +32,38 @@ export default class RxjsExamples extends React.Component<{}, { numbers: number[
 		const getPosts$ = axois.get(`${this.BASE_URL}/posts`);
 
 		// forkJoin section
-		forkJoin([from(getFirstUser$), from(getPosts$)]).pipe(
-			takeUntil(this.destroy$),
-			mergeMap((
-				[user, posts]:
-					[
-						AxiosResponse<{ id: number, name: string }>,
-						AxiosResponse<{ userId: number, id: number, title: string, body: string }[]>
+		forkJoin([from(getFirstUser$), from(getPosts$)])
+			.pipe(
+				takeUntil(this.destroy$),
+				mergeMap(
+					([user, posts]: [
+						AxiosResponse<{ id: number; name: string }>,
+						AxiosResponse<{ userId: number; id: number; title: string; body: string }[]>
 					]) => {
-				const usersPosts = posts.data.filter((el) => el.userId === user.data.id);
-				return of(usersPosts);
-			})
-		).subscribe((posts) => {
-			console.log("[RXJS: forkJoin + mergeMap")
-			console.log(posts);
-		})
+						const usersPosts = posts.data.filter((el) => el.userId === user.data.id);
+						return of(usersPosts);
+					}
+				)
+			)
+			.subscribe((posts) => {
+				console.log("[RXJS: forkJoin + mergeMap]");
+				console.log(posts);
+			});
 
 		forkJoin([]);
 		// from section
-		from(getComments$).pipe(
-			takeUntil(this.destroy$)
-		).subscribe((result: AxiosResponse) => {
-			console.log("[RXJS: from")
-			console.log(result.data as { postId: number, id: number, name: string, email: string, body: string })
-		});
+		from(getComments$)
+			.pipe(takeUntil(this.destroy$))
+			.subscribe((result: AxiosResponse) => {
+				console.log("[RXJS: from]");
+				console.log(result.data as { postId: number; id: number; name: string; email: string; body: string });
+			});
 
 		// of section
-		this.numbers$.pipe(
-			takeUntil(this.destroy$)
-		).subscribe((numbers: number[]) => {
-			console.log("[RXJS: of]")
-			console.log(numbers)
-			this.setState({ numbers })
+		this.numbers$.pipe(takeUntil(this.destroy$)).subscribe((numbers: number[]) => {
+			console.log("[RXJS: of]");
+			console.log(numbers);
+			this.setState({ numbers });
 		});
 	}
 
@@ -83,9 +81,13 @@ export default class RxjsExamples extends React.Component<{}, { numbers: number[
 			<React.Fragment>
 				<input type="text" value={this.state.inputDoubounce} onChange={this.onInputChangeHandler.bind(this)}></input>
 				{this.state.numbers.map((number, i) => {
-					return <div key={i + 1}>#{i + 1}: {number}</div>
+					return (
+						<div key={i + 1}>
+							#{i + 1}: {number}
+						</div>
+					);
 				})}
 			</React.Fragment>
-		)
+		);
 	}
 }

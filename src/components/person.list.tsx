@@ -101,8 +101,7 @@ export default class PersonList extends React.Component<any, IUserListState> {
 												variant="contained"
 												color="primary"
 												disabled={this.shouldTheSelectButtonBeDisabled(user.id)}
-												onClick={this.buttonPlusHandler.bind(this, user.id)}
-											>
+												onClick={this.buttonPlusHandler.bind(this, user.id)}>
 												Select
 											</Button>
 											<ListItemText primary={user.name} />

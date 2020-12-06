@@ -1,16 +1,16 @@
 import React from "react";
 type Props = {
 	searchMessage?: string;
-	onSumbitHandler: (term: string) => void
-}
+	onSumbitHandler: (term: string) => void;
+};
 
-export default class SearchBar extends React.Component<Props, { term: string}> {
+export default class SearchBar extends React.Component<Props, { term: string }> {
 	state = {
-		term: ""
+		term: "",
 	};
 
 	protected static defaultProps: Partial<Props> = {
-		searchMessage: "Search Picture..."
+		searchMessage: "Search Picture...",
 	};
 
 	onFormSubmit(event: React.FormEvent<HTMLFormElement>): void {
@@ -24,7 +24,10 @@ export default class SearchBar extends React.Component<Props, { term: string}> {
 				<form className="ui form" onSubmit={this.onFormSubmit.bind(this)}>
 					<div className="field">
 						<label>{this.props.searchMessage}</label>
-						<input type="text" value={this.state.term} onChange={e => this.setState({ term: e.target.value })}></input>
+						<input
+							type="text"
+							value={this.state.term}
+							onChange={(e) => this.setState({ term: e.target.value })}></input>
 					</div>
 				</form>
 			</div>

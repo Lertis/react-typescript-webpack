@@ -5,7 +5,7 @@ export default class ImageList extends React.Component<{ image: IImage }, { span
 	imageRef: React.RefObject<HTMLImageElement>;
 	constructor(props: { image: IImage }) {
 		super(props);
-		this.state = { spans: 0 }
+		this.state = { spans: 0 };
 		this.imageRef = React.createRef();
 	}
 
@@ -16,7 +16,7 @@ export default class ImageList extends React.Component<{ image: IImage }, { span
 	setSpans() {
 		const height: number | undefined = this.imageRef.current?.clientHeight;
 		const spans = Math.ceil((height || 0) / 150);
-		this.setState({ spans })
+		this.setState({ spans });
 	}
 
 	render() {
@@ -25,6 +25,6 @@ export default class ImageList extends React.Component<{ image: IImage }, { span
 			<div style={{ gridRowEnd: `${this.state.spans}` }}>
 				<img ref={this.imageRef} alt={description} src={urls.regular} />
 			</div>
-		)
+		);
 	}
 }
