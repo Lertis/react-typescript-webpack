@@ -2,13 +2,14 @@ import React, { Suspense } from "react";
 import "./index.css";
 import ReactDOM from "react-dom";
 import { Provider } from "react-redux";
-import { createStore, applyMiddleware } from "redux";
 import thunk from "redux-thunk";
+import { composeWithDevTools } from "redux-devtools-extension";
+import { createStore, applyMiddleware, compose } from "redux";
 import { rootReducer } from "./store/reducers/index";
 import reportWebVitals from "./reportWebVitals";
 import PostsList from "./components/posts/posts.list";
 
-const store = createStore(rootReducer, applyMiddleware(thunk));
+const store = createStore(rootReducer, compose(applyMiddleware(thunk), composeWithDevTools()));
 const LazyLoadedRootComponent = React.lazy(() => import("./components/person.list"));
 
 ReactDOM.render(
