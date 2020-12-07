@@ -1,7 +1,7 @@
 import React from "react";
 import renderer from "react-test-renderer";
 import { shallow } from "enzyme";
-import PersonDetail from "../person.info";
+import PersonDetail from "../persons/person.info";
 import { cloneDeep } from "lodash";
 import { USER_INFO_1, USER_INFO_2 } from "./user.details.set";
 import "./../../setupTests";

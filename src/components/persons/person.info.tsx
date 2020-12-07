@@ -1,5 +1,5 @@
 import React from "react";
-import { NO_INFO_USER_INFO, IUser } from "../entities/user";
+import { IUser, NO_INFO_USER_INFO } from "../../entities/user";
 import { cloneDeep } from "lodash";
 import { Card, CardContent, Typography } from "@material-ui/core";
 import { Phone } from "@material-ui/icons";

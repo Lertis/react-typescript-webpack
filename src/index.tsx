@@ -2,27 +2,29 @@ import React, { Suspense } from "react";
 import "./index.css";
 import ReactDOM from "react-dom";
 import { Provider } from "react-redux";
-import thunk from "redux-thunk";
-import { composeWithDevTools } from "redux-devtools-extension";
 import { createStore, applyMiddleware, compose } from "redux";
+import thunk from "redux-thunk";
+import { HashRouter as Router } from "react-router-dom";
+import { composeWithDevTools } from "redux-devtools-extension";
 import { rootReducer } from "./store/reducers/index";
+import Spinner from "./components/spinner";
 import reportWebVitals from "./reportWebVitals";
-import PostsList from "./components/posts/posts.list";
+
 
 const store = createStore(rootReducer, compose(applyMiddleware(thunk), composeWithDevTools()));
-const LazyLoadedRootComponent = React.lazy(() => import("./components/person.list"));
+const RouterWrapper = React.lazy(() => import("./components/navigation/nav.tabs"));
 
 ReactDOM.render(
 	<React.StrictMode>
-		<Suspense fallback={<div>Loading...</div>}>
-			<LazyLoadedRootComponent />
-		</Suspense>
 		<Provider store={store}>
-			<PostsList />
+			<Router>
+				<Suspense fallback={<div><Spinner /></div>}>
+					<RouterWrapper />
+				</Suspense>
+			</Router>
 		</Provider>
-	</React.StrictMode>,
-	document.getElementById("root")
-);
+	</React.StrictMode >,
+	document.getElementById("root"));
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))

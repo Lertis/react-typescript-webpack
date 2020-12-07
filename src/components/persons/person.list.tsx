@@ -1,14 +1,10 @@
 import React from "react";
 import axios from "axios";
+import "../../App.css";
 import { Button, ListItemText, ListItem, List } from "@material-ui/core";
-import { IUser } from "../entities/user";
-import PersonDetail from "./person.info";
-import Comment from "./comment";
+import { IUser } from "../../entities/user";
 import { cloneDeep } from "lodash";
-import "./../App.css";
-import ApprovalCard from "./approval.card";
-import PictureSearchWrapper from "./form-events/pictures.search.wrapper";
-import RxjsExamples from "./rxjs-examples/rxjs.examples";
+import PersonDetail from "./person.info";
 
 export interface IUserListState {
 	users: IUser[];
@@ -83,12 +79,10 @@ export default class PersonList extends React.Component<any, IUserListState> {
 	render() {
 		return (
 			<div>
-				<div>
-					<input
-						type="text"
+				<div className="ui input">
+					<input type="text"
 						placeholder="Enter item to be searched"
-						onChange={(e: React.ChangeEvent<HTMLInputElement>) => this.filterUsers(e)}
-					/>
+						onChange={(e: React.ChangeEvent<HTMLInputElement>) => this.filterUsers(e)}></input>
 				</div>
 				<div className="flex-space-around">
 					<div>
@@ -110,7 +104,6 @@ export default class PersonList extends React.Component<any, IUserListState> {
 								</div>
 							))}
 						</List>
-						<RxjsExamples />
 					</div>
 					<div>
 						<PersonDetail
@@ -119,19 +112,6 @@ export default class PersonList extends React.Component<any, IUserListState> {
 						/>
 					</div>
 				</div>
-				<React.Fragment>
-					<div style={{ display: "none" }} className="ui containers comments">
-						<ApprovalCard>
-							<Comment author="Sam" timeAgo={new Date(2020, 1, 1, 14, 15, 0).toLocaleString()} content="Really cool!" />
-						</ApprovalCard>
-						<ApprovalCard>
-							<Comment author="Molly" timeAgo={new Date(2020, 3, 5, 6, 1, 8).toLocaleString()} content="I like it." />
-						</ApprovalCard>
-					</div>
-				</React.Fragment>
-				<React.Fragment>
-					<PictureSearchWrapper />
-				</React.Fragment>
 			</div>
 		);
 	}

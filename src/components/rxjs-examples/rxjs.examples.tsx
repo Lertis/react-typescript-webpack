@@ -79,14 +79,18 @@ export default class RxjsExamples extends React.Component<{}, { numbers: number[
 	render() {
 		return (
 			<React.Fragment>
-				<input type="text" value={this.state.inputDoubounce} onChange={this.onInputChangeHandler.bind(this)}></input>
-				{this.state.numbers.map((number, i) => {
-					return (
-						<div key={i + 1}>
-							#{i + 1}: {number}
-						</div>
-					);
-				})}
+				<div>
+					<div className="ui input">
+						<input type="text" placeholder="Search..." value={this.state.inputDoubounce} onChange={this.onInputChangeHandler.bind(this)}></input>
+					</div>
+					{this.state.numbers.map((number, i) => {
+						return (
+							<div key={i + 1}>
+								#{i + 1}: {number}
+							</div>
+						);
+					})}
+				</div>
 			</React.Fragment>
 		);
 	}
