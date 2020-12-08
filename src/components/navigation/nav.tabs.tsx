@@ -1,5 +1,6 @@
 import React from "react";
 import { NavLink, Route, Switch } from "react-router-dom";
+import AgGridWrapper from "../ag-grid/ag-grid.wrapper";
 import ApprovalWrapper from "../approval/approval.wrapper";
 import PictureSearchWrapper from "../form-events/pictures.search.wrapper";
 import PersonList from "../persons/person.list";
@@ -22,6 +23,7 @@ export default class NavTabs extends React.Component {
 						<div className="item"><NavLink activeStyle={{ color: '#9505a7' }} to="/picture-search">Picture Search</NavLink></div>
 						<div className="item"><NavLink activeStyle={{ color: '#9505a7' }} to="/approval">Approval Card</NavLink></div>
 						<div className="item"><NavLink activeStyle={{ color: '#9505a7' }} to="/seasons">Seasons</NavLink></div>
+						<div className="item"><NavLink activeStyle={{ color: '#9505a7' }} to="/ag-grid">ag-Grid</NavLink></div>
 					</div>
 				</nav>
 				<Switch>
@@ -32,6 +34,7 @@ export default class NavTabs extends React.Component {
 					<Route path="/picture-search" component={PictureSearchWrapper} />
 					<Route path="/approval" component={ApprovalWrapper} />
 					<Route path="/seasons" component={SeasonWrapper} />
+					<Route path="/ag-grid" component={AgGridWrapper} />
 				</Switch>
 			</React.Fragment>
 		)
