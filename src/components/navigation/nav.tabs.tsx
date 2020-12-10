@@ -40,7 +40,7 @@ export default class NavTabs extends React.Component {
 		return (
 			<React.Fragment>
 				<nav>
-					<div className="ui menu">
+					<div className="ui menu tabs-list" style={{ overflow: "auto" }}>
 						{this.renderNavLinks()}
 					</div>
 				</nav>
